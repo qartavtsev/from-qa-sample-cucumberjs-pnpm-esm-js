@@ -9,8 +9,8 @@
   },
   "devDependencies": {
     "@cucumber/cucumber": "^11.0.1",
-    "@cucumber/messages": "^26.0.1",
-    "allure-cucumberjs": "^3.0.3",
-    "allure-js-commons": "^3.0.3"
+    "@cucumber/messages": "^27.0.0",
+    "allure-cucumberjs": "^3.0.6",
+    "allure-js-commons": "^3.0.6"
   }
 }
