@@ -43,7 +43,7 @@ permissions:
 
 jobs:
   autotests:
-    name: Run tests and generate Allure Report 
+    name: Run tests and generate Allure Report
     runs-on: ubuntu-latest
 
     steps:
@@ -61,16 +61,19 @@ jobs:
           corepack enable
           corepack prepare pnpm@latest --activate
 
+      - name: Install dependencies
+        run: pnpm install
+
       - name: Install allurectl
         uses: allure-framework/setup-allurectl@v1
         with:
           allure-endpoint: ${{ env.ALLURE_ENDPOINT }}
           allure-token: ${{ env.ALLURE_TOKEN }}
           allure-project-id: ${{ env.ALLURE_PROJECT_ID }}
-      
-      - name: remove old directories
+
+      - name: Remove old directories
         run: rm -rf allure-results .allure || true
-          
+
       - name: Run tests with Allure TestOps
         run: allurectl watch -- npm test
         continue-on-error: true
