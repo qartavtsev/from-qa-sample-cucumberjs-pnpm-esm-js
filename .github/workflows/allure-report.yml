@@ -64,8 +64,8 @@ jobs:
       - name: Install pnpm
         run: pnpm install
 
-      - run: pnpm test
-        continue-on-error: true
+    #  - run: pnpm test
+    #  continue-on-error: true
 
       - name: Install allurectl
         uses: allure-framework/setup-allurectl@v1
