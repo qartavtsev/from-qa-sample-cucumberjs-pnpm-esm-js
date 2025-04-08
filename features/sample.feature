@@ -22,12 +22,12 @@ Feature: Authentication
 	Scenario: Scenario 4: Password Masking
 		Given the user is on the login page
   		When the user enters a password in the password field
-    		Then the password should be masked (e.g., displayed as asterisks or dots)
-      		Then the user should be able to toggle password visibility (if supported)
+    		Then the password should be masked
+      		Then the user should be able to toggle password visibility
 
 	Scenario: Scenario 5: Account Lock after Multiple Failed Login Attempts
  		Given the user is on the login page
-   		When the user enters invalid credentials multiple times (e.g., 5 attempts)
+   		When the user enters invalid credentials multiple times
      		Then the account should be locked
        		Then a message should be displayed, saying Your account is locked. Please contact support
 
@@ -40,7 +40,7 @@ Feature: Authentication
 
 	Scenario: Scenario 7: Session Expiry
  		Given the user is logged in
-   		Given the session timeout duration has elapsed (e.g., 15 minutes of inactivity)
+   		Given the session timeout duration has elapsed
      		When the user attempts to perform any action
        		Then the user should be redirected to the login page
 	 	Then a message should be displayed, saying Your session has expired. Please log in again
