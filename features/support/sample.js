@@ -14,7 +14,7 @@ Given("the user is logged in", async function () {
   });
 });
 
-Given("the session timeout duration has elapsed (e.g., 15 minutes of inactivity)", async function () {
+Given("the session timeout duration has elapsed", async function () {
   await step("Simulating session timeout", async () => {
     console.log("Session has timed out");
   });
@@ -41,7 +41,7 @@ When("the user enters a password in the password field", async function () {
   console.log("Entered password");
 });
 
-When("the user enters invalid credentials multiple times (e.g., 5 attempts)", async function () {
+When("the user enters invalid credentials multiple times", async function () {
   console.log("Failed login 5 times");
 });
 
@@ -74,11 +74,11 @@ Then("an error message should be displayed, saying Username and password cannot 
   console.log("Blank field error shown");
 });
 
-Then("the password should be masked (e.g., displayed as asterisks or dots)", async function () {
+Then("the password should be masked", async function () {
   console.log("Password is masked");
 });
 
-Then("the user should be able to toggle password visibility (if supported)", async function () {
+Then("the user should be able to toggle password visibility", async function () {
   console.log("Toggle visibility works");
 });
 
