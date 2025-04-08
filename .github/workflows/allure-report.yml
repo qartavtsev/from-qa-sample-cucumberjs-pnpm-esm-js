@@ -1,12 +1,45 @@
-name: Allure Report
-run-name: ${{ github.actor }} is creating Allure report 🚀
+name: sample-cucumberjs-pnpm-esm-js
+
+env:
+  ALLURE_ENDPOINT: https://demo.testops.cloud/
+  ENDPOINT: https://demo.testops.cloud/
+  ALLURE_PROJECT_ID: 4160
+  ALLURE_TOKEN: ${{ secrets.ALLURE_TOKEN }}
+  ALLURE_JOB_RUN_ID: ${{ github.event.inputs.ALLURE_JOB_RUN_ID }}
+  ALLURE_RESULTS: "./out/allure-results"
+  BROWSER: ${{ inputs.BROWSER || 'OperaGX' }}
+  OS: ${{ inputs.OS || 'Win_11' }}
+  BRANCH: ${{ github.ref_name }}
 
 on:
   push:
-    branches-ignore:
-      - '!main'
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+    inputs:
+      BROWSER:
+        description: Browser
+        required: false
+        default: "OperaGX"
+      OS:
+        description: OS
+        required: false
+        default: "Win_11"
+      ALLURE_JOB_RUN_ID:
+        description: "ALLURE_JOB_RUN_ID - service parameter (leave blank)"
+        required: false
+        default: ""
+      ALLURE_USERNAME:
+        description: "ALLURE_USERNAME - service parameter (leave blank)"
+        required: false
+        default: ""
 
-permissions: write-all
+permissions:
+  contents: read
+  actions: write
 
 jobs:
   autotests:
@@ -14,11 +47,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-          uses: pnpm/action-setup@v2
-          with:
-          version: 8
-
-
       - name: Clone repository
         uses: actions/checkout@v4.2.2
 
@@ -28,31 +56,19 @@ jobs:
           node-version: 20
           cache: pnpm
 
-      - name: Install pnpm
+      - name: Install dependencies
         run: pnpm install
 
-      - run: pnpm test
+      - name: Install allurectl
+        uses: allure-framework/setup-allurectl@v1
+        with:
+          allure-endpoint: ${{ env.ALLURE_ENDPOINT }}
+          allure-token: ${{ env.ALLURE_TOKEN }}
+          allure-project-id: ${{ env.ALLURE_PROJECT_ID }}
+      
+      - name: remove old directories
+        run: rm -rf allure-results .allure || true
+          
+      - name: Run tests with Allure TestOps
+        run: allurectl watch -- npm test
         continue-on-error: true
-
-      - name: Setup Allure History
-        uses: actions/checkout@v4.2.2
-        if: always()
-        continue-on-error: true
-        with:
-          ref: gh-pages
-          path: gh-pages
-
-      - name: Generate Allure Report
-        uses: simple-elf/allure-report-action@v1.11
-        if: always()
-        with:
-          allure_results: ./out/allure-results
-          allure_history: allure-history
-
-      - name: Publish Allure Report
-        if: always()
-        uses: peaceiris/actions-gh-pages@v4.0.0
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_branch: gh-pages
-          publish_dir: allure-history
