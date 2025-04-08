@@ -47,6 +47,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
       - name: Clone repository
         uses: actions/checkout@v4.2.2
 
@@ -56,13 +61,11 @@ jobs:
           node-version: 20
           cache: pnpm
 
-      - name: Enable corepack and install pnpm
-        run: |
-          corepack enable
-          corepack prepare pnpm@latest --activate
-
-      - name: Install dependencies
+      - name: Install pnpm
         run: pnpm install
+
+      - run: pnpm test
+        continue-on-error: true
 
       - name: Install allurectl
         uses: allure-framework/setup-allurectl@v1
