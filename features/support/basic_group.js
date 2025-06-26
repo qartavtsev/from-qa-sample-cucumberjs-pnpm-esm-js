@@ -1,6 +1,5 @@
 import { Given, When, Then } from "@cucumber/cucumber";
-import { allure } from 'allure-cucumberjs';
-import { step } from "allure-js-commons";
+import { allure, step } from "allure-js-commons";
 
 // === GIVEN ===
 Given(`user is logged in with user role "Publisher Super Admin"`, async function () {
