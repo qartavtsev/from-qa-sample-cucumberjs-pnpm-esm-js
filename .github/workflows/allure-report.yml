@@ -12,12 +12,6 @@ env:
   BRANCH: ${{ github.ref_name }}
 
 on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
   workflow_dispatch:
     inputs:
       BROWSER:
