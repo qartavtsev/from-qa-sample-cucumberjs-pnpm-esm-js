@@ -1,4 +1,4 @@
-import { Given, When, Then, Background, Rule } from "@cucumber/cucumber";
+import { Given, When, Then } from "@cucumber/cucumber";
 import { step } from "allure-js-commons";
 
 // === GIVEN ===
