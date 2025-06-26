@@ -44,3 +44,11 @@ Feature: Authentication
      		When the user attempts to perform any action
        		Then the user should be redirected to the login page
 	 	Then a message should be displayed, saying Your session has expired. Please log in again
+
+	Scenario Outline: test authorization as "<login>"
+	  Then authorize as "<login>"
+	
+	  Examples:
+	    | login               |
+	    | johndoe             |
+	    | johndoe@example.com |
