@@ -22,3 +22,13 @@ Feature: Multiple site support
     Given I am logged in as Greg
     When I try to post to "Expensive Therapy"
     Then I should see "Your article was published."
+
+Scenario Outline: eating
+  Given there are <start> cucumbers
+  When I eat <eat> cucumbers
+  Then I should have <left> cucumbers
+
+  Examples:
+    | start | eat | left |
+    |    12 |   5 |    7 |
+    |    20 |   5 |   15 |
