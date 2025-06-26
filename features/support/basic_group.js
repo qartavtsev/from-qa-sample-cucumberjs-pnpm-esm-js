@@ -9,7 +9,7 @@ Given(`user is logged in with user role "Publisher Super Admin"`, async function
 });
 
 // === WHEN ===
-When('user performs "delete" a "basic group" operation with parameters {string} and {string}', async (identityDescription, identityCode) => {
+When(`user performs "delete" a "basic group" operation with parameters {string} and {string}`, async (identityDescription, identityCode) => {
       await allure.parameter("identityDescription", identityDescription);
       await allure.parameter("identityCode", identityCode);
 });
