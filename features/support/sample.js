@@ -106,7 +106,7 @@ Then("a message should be displayed, saying Your session has expired. Please log
   console.log("Session expired message shown");
 });
 
-Then(`authorize as {string}`, async (login) => {
+Then("authorize as {string}", async (login) => {
   await allure.parameter("auth_method", "password");
   await allure.parameter("login", login);
   // ...
