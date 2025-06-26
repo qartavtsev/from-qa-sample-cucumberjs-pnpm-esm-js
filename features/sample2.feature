@@ -23,12 +23,10 @@ Feature: Multiple site support
     When I try to post to "Expensive Therapy"
     Then I should see "Your article was published."
 
-Scenario Outline: eating
-  Given there are <start> cucumbers
-  When I eat <eat> cucumbers
-  Then I should have <left> cucumbers
+Scenario Outline: Test authorization using "<login>"
+  Then authorize as "<login>"
 
   Examples:
-    | start | eat | left |
-    |    12 |   5 |    7 |
-    |    20 |   5 |   15 |
+    | login               |
+    | johndoe             |
+    | johndoe@example.com |
