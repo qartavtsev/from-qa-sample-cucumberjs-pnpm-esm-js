@@ -1,5 +1,4 @@
 import { Given, When, Then } from "@cucumber/cucumber";
-import { allure } from 'allure-cucumberjs';
 import { step } from "allure-js-commons";
 
 // === GIVEN ===
