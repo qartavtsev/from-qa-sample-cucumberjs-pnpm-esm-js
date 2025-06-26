@@ -1,4 +1,4 @@
-import { Given, When, Then } from "@cucumber/cucumber";
+import { Given, When, Then, Background, Rule } from "@cucumber/cucumber";
 import { step } from "allure-js-commons";
 
 // === GIVEN ===
@@ -104,4 +104,10 @@ Then("the session should be terminated", async function () {
 
 Then("a message should be displayed, saying Your session has expired. Please log in again", async function () {
   console.log("Session expired message shown");
+});
+
+Then(`authorize as {string}`, async (login) => {
+  await allure.parameter("auth_method", "password");
+  await allure.parameter("login", login);
+  // ...
 });
